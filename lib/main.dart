@@ -67,13 +67,13 @@ Widget buttonSection = Row(
   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
   children: [
     Column(
-      children: [Icon(Icons.call), Text('CALL')],
+      children: const [Icon(Icons.call), Text('CALL')],
     ),
     Column(
-      children: [Icon(Icons.near_me), Text('ROUTE')],
+      children: const [Icon(Icons.near_me), Text('ROUTE')],
     ),
     Column(
-      children: [Icon(Icons.share), Text('SHARE')],
+      children: const [Icon(Icons.share), Text('SHARE')],
     )
   ],
 );
