@@ -1,0 +1,21 @@
+name: lint
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  test:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.8'
+          channel: 'stable'
+      - name: Install packages
+        run: flutter pub get
+      - name: flutter analyze
+        run: flutter analyze
