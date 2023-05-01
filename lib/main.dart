@@ -1,31 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-void main() => runApp(const MyApp());
+part 'main.g.dart';
+
+void main() {
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter layout demo',
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Flutter layout demo'),
-          ),
-          body: ListView(
-            children: [
-              photoSection,
-              titleSection,
-              buttonSection,
-              buttonSection,
-              textSection,
-              textSection,
-              textSection,
-              textSection,
-              textSection,
-            ],
-          )),
+    return const MaterialApp(title: 'Flutter layout demo', home: Home());
+  }
+}
+
+@riverpod
+class Counter extends _$Counter {
+  @override
+  int build() => 0;
+
+  void increment() => state++;
+}
+
+class Home extends ConsumerWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Counter example'),
+      ),
+      body: Center(
+        child: Text('${ref.watch(counterProvider)}'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => ref.read(counterProvider.notifier).increment(),
+      ),
     );
   }
 }
